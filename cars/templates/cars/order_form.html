@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Оформление заказа{% endblock %}
+
+{% block content %}
+<div class="max-w-lg mx-auto bg-white p-4 rounded shadow-sm">
+    <h2 class="mb-4 text-center fw-bold fs-4">Заказ: {{ car.brand }} {{ car.model }}</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary w-100">Оформить заказ</button>
+    </form>
+</div>
+{% endblock %}

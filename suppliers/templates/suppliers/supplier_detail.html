@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block title %}{{ supplier.name }}{% endblock %}
+{% block content %}
+<div class="container">
+    <h2 class="mb-3">Поставщик: {{ supplier.name }}</h2>
+    <p><strong>Телефон:</strong> {{ supplier.phone }}</p>
+    <p><strong>Email:</strong> {{ supplier.email }}</p>
+
+    <div class="mb-4">
+        <a href="{% url 'add_car_to_supplier' supplier.id %}" class="btn btn-primary">➕ Добавить авто</a>
+        <a href="{% url 'suppliers_list' %}" class="btn btn-secondary ms-2">← Назад к списку</a>
+    </div>
+
+    <h4>Машины от поставщика</h4>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>Марка</th>
+                    <th>Модель</th>
+                    <th>Год</th>
+                    <th>Объем</th>
+                    <th>Топливо</th>
+                    <th>Пробег</th>
+                    <th>Цена</th>
+                    <th>Состояние</th>
+                    <th>Пополнить в автосалон</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for car in cars %}
+                <tr>
+                    <td>{{ car.brand }}</td>
+                    <td>{{ car.model }}</td>
+                    <td>{{ car.year }}</td>
+                    <td>{{ car.engine_volume }} л</td>
+                    <td>{{ car.get_fuel_type_display }}</td>
+                    <td>{{ car.mileage }} км</td>
+                    <td>{{ car.price }} ₸</td>
+                    <td>{{ car.get_condition_display }}</td>
+                    <td>
+                        <form method="post" action="{% url 'restock_car' supplier.id %}" class="d-flex">
+                            {% csrf_token %}
+                            <input type="hidden" name="car_id" value="{{ car.id }}">
+                            <input type="number" name="amount" min="1" required class="form-control form-control-sm me-2" placeholder="шт.">
+                            <button type="submit" class="btn btn-sm btn-outline-success">➕</button>
+                        </form>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="9" class="text-center text-muted">У этого поставщика пока нет машин</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

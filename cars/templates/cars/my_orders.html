@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Мои заказы{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="mb-4">🧾 Мои заказы</h2>
+
+    {% if orders %}
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Машина</th>
+                        <th>Цвет</th>
+                        <th>Комплектация</th>
+                        <th>Дата получения</th>
+                        <th>Статус</th>
+                        <th>Заказано</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                        <tr>
+                            <td><strong>{{ order.car.brand }} {{ order.car.model }}</strong></td>
+                            <td>{{ order.get_color_display }}</td>
+                            <td>{{ order.get_completion_display }}</td>
+                            <td>{{ order.pickup_date }}</td>
+                            <td>
+                                {% if order.status == 'approved' %}
+                                    <span class="badge bg-success">Подтверждено</span>
+                                {% elif order.status == 'rejected' %}
+                                    <span class="badge bg-danger">Отклонено</span>
+                                {% else %}
+                                    <span class="badge bg-warning text-dark">В ожидании</span>
+                                {% endif %}
+                            </td>
+                            <td>{{ order.ordered_at|date:"d.m.Y H:i" }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <p class="text-muted">У вас пока нет заказов.</p>
+    {% endif %}
+</div>
+{% endblock %}

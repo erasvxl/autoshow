@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2>Каталог автомобилей</h2>
+    <div class="row">
+        {% for car in cars %}
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    {% if car.image %}
+                        <img src="{{ car.image.url }}" class="card-img-top" alt="{{ car.brand }}">
+                    {% else %}
+                        <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Нет фото">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ car.brand }} {{ car.model }}</h5>
+                        <p class="card-text">
+                            Год: {{ car.year }} <br>
+                            Двигатель: {{ car.engine_volume }} л <br>
+                            Пробег: {{ car.mileage }} км <br>
+                            Цена: <strong>${{ car.price }}</strong> <br>
+                            <span class="text-muted">В наличии: <strong>{{ car.quantity }}</strong> шт.</span>
+                        </p>
+
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'order_car' car.id %}" class="btn btn-success btn-sm mt-2">Заказать</a>
+
+                            {% if user.role == 'admin' or user.role == 'manager' %}
+                                <a href="{% url 'car_edit' car.pk %}" class="btn btn-warning btn-sm mt-2">Редактировать</a>
+                                <a href="{% url 'car_delete' car.pk %}" class="btn btn-danger btn-sm mt-2">Удалить</a>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

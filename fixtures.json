@@ -1,0 +1,57 @@
+[
+    {
+        "model": "cars.car",
+        "fields": {
+            "brand": "Toyota",
+            "model": "Camry",
+            "year": 2023,
+            "engine_volume": 2.5,
+            "fuel_type": "gasoline",
+            "mileage": 10000,
+            "price": 25000.0,
+            "condition": "used"
+        }
+    },
+    {
+        "model": "cars.car",
+        "fields": {
+            "brand": "BMW",
+            "model": "X5",
+            "year": 2022,
+            "engine_volume": 3.0,
+            "fuel_type": "diesel",
+            "mileage": 5000,
+            "price": 55000.0,
+            "condition": "new"
+        }
+    },
+    {
+        "model": "cars.car",
+        "fields": {
+            "brand": "Tesla",
+            "model": "Model S",
+            "year": 2024,
+            "engine_volume": 0.0,
+            "fuel_type": "electric",
+            "mileage": 2000,
+            "price": 75000.0,
+            "condition": "new"
+        }
+    },
+    {
+        "model": "cars.supplier",
+        "fields": {
+            "name": "Auto Parts Ltd.",
+            "phone": "123-456-7890",
+            "email": "contact@autoparts.com"
+        }
+    },
+    {
+        "model": "cars.supplier",
+        "fields": {
+            "name": "Luxury Cars Import",
+            "phone": "987-654-3210",
+            "email": "info@luxurycars.com"
+        }
+    }
+]
