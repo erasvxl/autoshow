@@ -71,11 +71,12 @@ WSGI_APPLICATION = 'auto_show.wsgi.application'
 # Database
 DATABASES = {
     'default': dj_database_url.config(
-        default=f"sqlite:///{BASE_DIR}/db.sqlite3",
+        default=f"sqlite:///{BASE_DIR}/db.sqlite3",   # Указываем явно SQLite, если нет DATABASE_URL
         conn_max_age=600,
         ssl_require=False
     )
 }
+
 
 
 # Password validation
