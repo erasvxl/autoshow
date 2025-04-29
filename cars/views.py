@@ -191,35 +191,28 @@ from catalog.tasks import send_telegram_message
 def order_car(request, car_id):
     car = get_object_or_404(Car, id=car_id, in_stock=True)
 
-    # Проверка доступности машины
     if car.quantity <= 0:
-        return redirect('car_list')  # или покажи сообщение "Нет в наличии"
+        return redirect('car_list')
 
     if request.method == 'POST':
         form = CarOrderForm(request.POST)
         if form.is_valid():
-            # Создание заказа
             order = form.save(commit=False)
             order.user = request.user
             order.car = car
             order.save()
 
-            # Уменьшаем количество после успешного заказа
             car.quantity -= 1
             car.save()
 
-            # Отправка уведомления в Telegram
-            send_telegram_message.delay(
-                f"🆕 Новый заказ машины #{order.id} от пользователя {order.user.username}"
-            )
+            # Отправляем в Telegram подробный заказ по ID
+            send_telegram_message.delay(order.id)
 
             return redirect('my_orders')
     else:
         form = CarOrderForm()
 
     return render(request, 'cars/order_form.html', {'form': form, 'car': car})
-
-
 @login_required
 def my_orders(request):
     orders = CarOrder.objects.filter(user=request.user).select_related('car')

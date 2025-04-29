@@ -1,13 +1,29 @@
+
 {% extends 'base.html' %}
-{% block title %}Добавить авто{% endblock %}
+{% load crispy_forms_tags %}
+
 {% block content %}
-<div class="container">
-    <h2 class="mb-3">Добавить авто для {{ supplier.name }}</h2>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">Сохранить</button>
-        <a href="{% url 'supplier_detail' supplier.id %}" class="btn btn-secondary ms-2">Отмена</a>
-    </form>
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10 col-lg-8">
+            <div class="card shadow-lg border-0 rounded-4">
+                <div class="card-header bg-dark text-white text-center rounded-top-4">
+                    <h3 class="mb-0">Добавить авто поставщику</h3>
+                </div>
+                <div class="card-body bg-light p-4 rounded-bottom-4">
+                    <form method="post" enctype="multipart/form-data" novalidate>
+                        {% csrf_token %}
+                        {{ form|crispy }}
+
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-primary btn-lg px-5 rounded-pill shadow">
+                                <i class="bi bi-plus-circle-fill"></i> Добавить авто
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}
