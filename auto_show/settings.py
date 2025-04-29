@@ -93,9 +93,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'autoshowdatabase',
-        'USER': 'postgres',
-        'PASSWORD': 'pass1234',
-        'HOST': 'localhost',
+        'USER': 'daurenov',
+        'PASSWORD': '97Erasyl00',
+        'HOST': 'daurenov.postgres.pythonanywhereservices.com',
         'PORT': '5432',
     }
 }
