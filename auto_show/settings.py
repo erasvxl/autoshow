@@ -147,3 +147,17 @@ TELEGRAM_CHAT_ID = '802343838'
 
 # Custom user model
 AUTH_USER_MODEL = 'users.CustomUser'
+
+from decouple import config
+
+SECRET_KEY = config("SECRET_KEY")
+DEBUG = config("DEBUG", cast=bool, default=False)
+EMAIL_HOST_USER = config("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
+STRIPE_SECRET_KEY = config("STRIPE_SECRET_KEY")
+TELEGRAM_BOT_TOKEN = config("TELEGRAM_BOT_TOKEN")
+DATABASES = {
+    'default': dj_database_url.config(
+        default=config("DATABASE_URL")
+    )
+}

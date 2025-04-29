@@ -1,0 +1,19 @@
+# Python кэш
+__pycache__/
+*.py[cod]
+
+# SQLite база
+*.sqlite3
+
+# Личные настройки среды
+.env
+
+# Виртуальное окружение
+venv/
+
+# Django static/media
+/media/
+staticfiles/
+
+# PyCharm IDE
+.idea/
