@@ -1,19 +1,40 @@
-# Python кэш
+# 🐍 Python
 __pycache__/
 *.py[cod]
+*.so
 
-# SQLite база
-*.sqlite3
-
-# Личные настройки среды
-.env
-
-# Виртуальное окружение
+# 📦 Виртуальное окружение
 venv/
+env/
+ENV/
 
-# Django static/media
+# 🗃️ База данных (локальная)
+*.sqlite3
+*.log
+
+# 🛠️ Django
 /media/
 staticfiles/
+db.sqlite3
+celerybeat-schedule
+*.pid
 
-# PyCharm IDE
+# 🔐 Переменные окружения и секреты
+.env
+.env.*
+
+# 💻 PyCharm / IDE
 .idea/
+*.iml
+
+# 🧠 VS Code (если используешь)
+.vscode/
+
+# 🧱 Node / JS frontend (если используешь React/Vue)
+node_modules/
+dist/
+build/
+
+# 🖥️ Системные файлы
+.DS_Store
+Thumbs.db
